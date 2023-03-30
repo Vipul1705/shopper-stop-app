@@ -5,7 +5,7 @@ export const fetchCartData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://snack-snack-def61-default-rtdb.firebaseio.com/cart.json"
+        "https://shopper-stop-b5623-default-rtdb.firebaseio.com/cart.json"
       );
       if (!response.ok) {
         throw new Error("Could not fetch data");
@@ -51,7 +51,7 @@ export const sendCartData = (cart) => {
     );
     const sendRequest = async () => {
       const response = await fetch(
-        "https://snack-snack-def61-default-rtdb.firebaseio.com/cart.json",
+        "https://shopper-stop-b5623-default-rtdb.firebaseio.com/cart.json",
         {
           method: "PUT",
           body: JSON.stringify({

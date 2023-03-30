@@ -3,8 +3,7 @@ import { cartActions } from "../../store/cart-slice";
 import Card from "../UI/Card";
 import classes from "./ProductItem.module.css";
 
-const ProductItem = (props) => {
-  const { title, price, description, id } = props;
+const ProductItem = ({ title, price, description, id }) => {
   const dispatch = useDispatch();
 
   const addToCartHandler = () => {

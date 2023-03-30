@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import ProductItem from "./ProductItem";
 import classes from "./Products.module.css";
 
@@ -23,11 +24,35 @@ const DUMMY_PRODUCTS = [
 ];
 
 const Products = (props) => {
+  const [products, setProducts] = useState([]);
+  const fetchProducts = async () => {
+    const response = await fetch(
+      "https://shopper-stop-b5623-default-rtdb.firebaseio.com/products.json"
+    );
+    if (!response.ok) {
+      throw new Error("Could not fetch data");
+    }
+    const responseData = await response.json();
+    let loadedProducts = [];
+    for (const key in responseData) {
+      loadedProducts.push({
+        id: key,
+        title: responseData[key].title,
+        price: responseData[key].price,
+        description: responseData[key].description,
+      });
+    }
+    setProducts(loadedProducts);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  });
   return (
     <section className={classes.products}>
       <h2>Buy your favorite products</h2>
       <ul>
-        {DUMMY_PRODUCTS.map((product) => (
+        {products?.map((product) => (
           <ProductItem
             key={product.id}
             id={product.id}
